@@ -18,6 +18,7 @@ void add_goat(set<Goat> &trip, string names[], string colors[]);
 void delete_goat(set<Goat> &trip);
 void display_trip(const set<Goat> &trip);
 
+
 // Function to display the main menu and get user choice
 
 int main_menu() {
@@ -84,7 +85,7 @@ void delete_goat(set<Goat> &trip) {
     
     bool found = false;
     for (auto it = trip.begin(); it != trip.end(); ++it) {
-        if (it->getName() == name) {
+        if (it->get_name() == name) {
             cout << "Deleting goat: ";
             it->display();
             trip.erase(it);
