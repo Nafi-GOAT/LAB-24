@@ -69,7 +69,33 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
     }
 }
 
+void delete_goat(set<Goat> &trip) {
+    if (trip.empty()) {
+        cout << "No goats to delete.\n";
+        return;
+    }
 
+    display_trip(trip);
+
+    cout << "Enter goat name to delete: ";
+    string name;
+    cin >> name;
+
+    
+    bool found = false;
+    for (auto it = trip.begin(); it != trip.end(); ++it) {
+        if (it->getName() == name) {
+            cout << "Deleting goat: ";
+            it->display();
+            trip.erase(it);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+        cout << "No goat found with name \"" << name << "\".\n";
+}
 int main() {
     srand(time(0));
     bool again = true;
