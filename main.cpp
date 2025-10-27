@@ -56,7 +56,7 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
     g.display();
 }
 
- void display_trip(const set<Goat> trip) {
+ void display_trip(const set<Goat> &trip) {
     if (trip.empty()) {
         cout << "No goats in the trip." << endl;
         return;
@@ -98,21 +98,23 @@ void delete_goat(set<Goat> &trip) {
 }
 int main() {
     srand(time(0));
-    bool again = true;
-    list<Goat> trip;
+    set<Goat> trip;
+    string names[SZ_NAMES], colors[SZ_COLORS];
 
-    // read & populate arrays for names and colors
+    // Load names
     ifstream fin("names.txt");
-    string names[SZ_NAMES];
     int i = 0;
-    while (fin >> names[i++]);
+    while (i < SZ_NAMES && fin >> names[i]) i++;
     fin.close();
 
+    // Load colors
     ifstream fin1("colors.txt");
-    string colors[SZ_COLORS];
     i = 0;
-    while (fin1 >> colors[i++]);
+    while (i < SZ_COLORS && fin1 >> colors[i]) i++;
     fin1.close();
+
+    bool again = true;
+
 
  while (again) {
         int num = main_menu();
