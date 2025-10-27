@@ -13,11 +13,10 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(set<Goat> trip);
-void delete_goat(set<Goat> &trip);
-void add_goat(set<Goat> &trip, string [], string []);
-void display_trip(set<Goat> trip);
 int main_menu();
+void add_goat(set<Goat> &trip, string names[], string colors[]);
+void delete_goat(set<Goat> &trip);
+void display_trip(const set<Goat> &trip);
 
 // Function to display the main menu and get user choice
 
@@ -47,15 +46,19 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
     int age = rand() % (MAX_AGE + 1);
 
     Goat g(names[nameI], age, colors[colorI]); 
-    trip.push_back(g);
+    auto result = trip.insert(g);
 
-    cout << "New goat: ";
+    if (result.second)
+        cout << "New goat added: ";
+    else
+        cout << "Duplicate goat ignored: ";
+
     g.display();
 }
 
- void display_trip(set<Goat> trip) {
+ void display_trip(const set<Goat> trip) {
     if (trip.empty()) {
-        cout << "It is empty." << endl;
+        cout << "No goats in the trip." << endl;
         return;
     }
 
@@ -67,7 +70,7 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
     }
 }
 
-int select_goat(list<Goat> trip) {
+int select_goat(set<Goat> trip) {
     display_trip(trip);
     cout << "Which spot would you like to delete --> ";
     int choice;
