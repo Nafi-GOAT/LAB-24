@@ -63,46 +63,12 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
     }
 
     int a = 1;
-    for (Goat g : trip) {
-        cout << "[ " << a << " ] ";
+    for (const Goat &g : trip) {
+        cout << "[ " << a++ << " ] ";
         g.display();
-        a++;
     }
 }
 
-int select_goat(set<Goat> trip) {
-    display_trip(trip);
-    cout << "Which spot would you like to delete --> ";
-    int choice;
-    cin >> choice;
-
-    while (choice < 1 || choice > trip.size()) {
-        cout << "Re-enter your choice: ";
-        cin >> choice;
-    }
-    return choice - 1;
-}
-
-void delete_goat(list<Goat> &trip) {
-    if (trip.empty()) {
-        cout << "The list is empty." << endl;
-        return;
-    }
-
-    int num = select_goat(trip);
-    if (num == -1) return;
-
-    int a = 0;
-    for (auto it = trip.begin(); it != trip.end(); ++it, ++a) {
-        if (a == num) {
-            cout << "Delete: ";
-            it->display();
-            trip.erase(it);
-            cout << "Your chosen goat is now deleted." << endl;
-            return;
-        }
-    }
-}
 
 int main() {
     srand(time(0));
